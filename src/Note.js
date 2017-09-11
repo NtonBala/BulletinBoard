@@ -38,32 +38,62 @@ var Note = React.createClass({
         this.setState({editing: false});
     },
     renderForm() {
-        return (
-            <div className="note" style={this.style}>
-                <textarea ref="newText" defaultValue={this.props.children}></textarea>
-                <button onClick={this.save}>SAVE</button>
-                <button onClick={this.cancel}>X</button>
-            </div>
-
-        )
+        return React.createElement(
+            'div',
+            {
+                className: 'note',
+                style: this.style
+            },
+            React.createElement(
+                'textarea',
+                {
+                    ref: 'newText',
+                    defaultValue: this.props.children
+                }
+            ),
+            React.createElement(
+                'button',
+                {onClick: this.save},
+                'SAVE'
+            ),
+            React.createElement(
+                'button',
+                {onClick: this.cancel},
+                'X'
+            )
+        );
     },
     renderDisplay() {
-        return (
-            <div className="note" style={this.style}>
-                <p>{this.props.children}</p>
-                <span>
-                        <button onClick={this.edit}>EDIT</button>
-                        <button onClick={this.remove}>X</button>
-                    </span>
-            </div>
-        )
+        return React.createElement(
+            'div',
+            {className: 'note', style: this.style},
+            React.createElement(
+                'p',
+                null,
+                this.props.children
+            ),
+            React.createElement(
+                'span',
+                null,
+                React.createElement(
+                    'button',
+                    {onClick: this.edit},
+                    'EDIT'
+                ),
+                React.createElement(
+                    'button',
+                    {onClick: this.remove},
+                    'X'
+                )
+            )
+        );
     },
     render() {
-        return (
-            <Draggable>
-                {this.state.editing ? this.renderForm() : this.renderDisplay()}
-            </Draggable>
-        )
+        return React.createElement(
+            Draggable,
+            null,
+            this.state.editing ? this.renderForm() : this.renderDisplay()
+        );
     }
 });
 

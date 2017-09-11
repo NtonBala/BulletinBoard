@@ -60,24 +60,30 @@ var Board = React.createClass({
         this.setState({notes});
     },
     eachNote(note) {
-        return (
-            <Note
-                key={note.id}
-                id={note.id}
-                onChange={this.update}
-                onRemove={this.remove}
-            >
-                {note.note}
-            </Note>
-    )
+        return React.createElement(
+            Note,
+            {
+                key: note.id,
+                id: note.id,
+                onChange: this.update,
+                onRemove: this.remove
+            },
+            note.note
+        );
     },
     render() {
-        return (
-            <div className="board">
-                {this.state.notes.map(this.eachNote)}
-                <button onClick={() => this.add('New note')}>+</button>
-            </div>
-        )
+        return React.createElement(
+            'div',
+            {className: 'board'},
+            this.state.notes.map(this.eachNote),
+            React.createElement(
+                'button',
+                {
+                    onClick: (() => this.add('New note'))
+                },
+                '+'
+            )
+        );
     }
 });
 
